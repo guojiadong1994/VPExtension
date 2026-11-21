@@ -1,16 +1,22 @@
 {
   "manifest_version": 3,
   "name": "vivo 广告计划助手",
-  "version": "0.1.0",
-  "description": "独立的 vivo 营销新版广告计划配置界面。当前版本仅实现右键表单与本地配置管理。",
-  "permissions": ["contextMenus", "storage"],
+  "version": "0.3.12",
+  "description": "vivo 新版批量广告计划创建助手：每个计划独立流量及本地素材，共享广告参数，逐个提交并关闭。",
+  "permissions": ["contextMenus", "storage", "tabs", "debugger", "webNavigation"],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
       "matches": ["https://ad.vivo.com.cn/*"],
-      "js": ["content.js"],
+      "js": ["link-check.js", "media-store.js", "content.js", "workflow.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://adcc.vivo.com.cn/material-center-new*"],
+      "js": ["material-frame.js"],
+      "all_frames": true,
       "run_at": "document_idle"
     }
   ],
