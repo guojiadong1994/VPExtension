@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "vivo 广告计划助手",
+  "version": "0.1.0",
+  "description": "独立的 vivo 营销新版广告计划配置界面。当前版本仅实现右键表单与本地配置管理。",
+  "permissions": ["contextMenus", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://ad.vivo.com.cn/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["panel.css"],
+      "matches": ["https://ad.vivo.com.cn/*"]
+    }
+  ]
+}
